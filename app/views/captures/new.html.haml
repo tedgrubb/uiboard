@@ -1,0 +1,17 @@
+= form_for @capture, multipart: true, data: {"capture-id" => @capture.id}, html: {id: 'capture-form'} do |capture|
+  %ul
+    %li= capture.text_field :title, placeholder: "Title"
+    %li= capture.text_area :description, placeholder: "Notes", rows: 5
+    %li= capture.text_field :url, placeholder: "URL"
+    %li
+      .files
+        - if @capture.images.any?
+          = spaceless do
+            - @capture.images.each do |image|
+              .file{style: "background-image: url(#{image.file.thumb('240x').url})"}
+        - else
+          .add-file
+            Drop files or
+            %strong click here
+    %li.submit
+      = capture.submit "Save", class: 'button small radius'

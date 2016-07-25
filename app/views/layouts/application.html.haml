@@ -1,0 +1,22 @@
+!!!
+%html
+%head
+  %title UX Board
+  = stylesheet_link_tag "application"
+  = javascript_include_tag "vendor/modernizr"
+  = csrf_meta_tag
+
+%body
+  #header
+    .nav
+      = link_to "Upload", new_capture_path
+    .logo
+      = link_to image_tag('ux-board.png'), root_path
+    %form{class: 'search', action: '/', method: 'GET'}
+      %input{type: :text, placeholder: "Search", name: "q"}
+
+  = yield
+
+  / start javascript include
+  = javascript_include_tag "application"
+  / end javascript include

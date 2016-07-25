@@ -1,0 +1,24 @@
+#capture{class: "#{@capture.images.first.file.landscape? ? 'landscape' : 'portrait'}"}
+  %h1= @capture.title
+  %p
+    = @capture.description
+    %br
+    = link_to @capture.url
+
+  - if @capture.images.size > 1
+    .pages
+      - @capture.images.each_with_index do |image, i|
+        %span{class: "#{'active' if i==0}", data: {src: image.file.thumb('800x').url}}
+
+    .chrome
+      .bar
+        %span.red
+        %span.yellow
+        %span.green
+      = image_tag @capture.images.first.file.thumb('1000x').url, class: 'image'
+  - else
+    .chromeless
+      = image_tag @capture.images.first.file.thumb('1000x').url, class: 'image'
+
+  .comments
+    %h5 Comments

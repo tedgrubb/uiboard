@@ -1,0 +1,22 @@
+#controls
+  = form_tag do
+    %dl
+      %dt Filters
+      %dd
+        - [:forms, :lists, :navigation, :buttons, :typography].each do |filter_name|
+          = check_box_tag filter_name
+          = label_tag filter_name
+          %br
+
+#board
+  %ul.box-grid
+    - @captures.each do |capture|
+      %li
+        = link_to '', capture, data: {original: capture.images.first.file.thumb('500x500#n').url}
+        %h3= capture.title
+        %p
+          %span.timestamp
+            = time_ago_in_words capture.created_at
+          %span.tag
+            = rand(1..30)
+            comments
